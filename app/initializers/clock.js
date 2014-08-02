@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import Clock from '../services/clock';
 
 export default {
