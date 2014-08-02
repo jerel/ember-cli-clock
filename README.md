@@ -7,7 +7,7 @@ time up-to-date so I generalized the solution to this Ember CLI Add-on.
 
 [Live Demo](http://clock.jerel.co/)
 
-[![Build Status](https://travis-ci.org/ngenworks/ember-cli-clock.svg?branch=master)](https://travis-ci.org/ngenworks/ember-cli-clock)
+[![Build Status](https://travis-ci.org/jerel/ember-cli-clock.svg?branch=master)](https://travis-ci.org/jerel/ember-cli-clock)
 
 ## Installation
 
