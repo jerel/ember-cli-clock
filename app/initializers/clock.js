@@ -5,5 +5,6 @@ export default {
   initialize: function(container, app) {
     app.register('clock:main', Clock);
     app.inject('controller', 'clock', 'clock:main');
+    app.inject('component', 'clock', 'clock:main');
   }
 };
