@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.Object.extend({
+export default Ember.Service.extend({
   intervalTime: 1000,
   second: 0,
   minute: 0,
