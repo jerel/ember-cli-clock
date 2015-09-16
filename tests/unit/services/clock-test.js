@@ -1,11 +1,16 @@
 import Ember from 'ember';
+import Clock from 'dummy/services/clock';
 
 import {
   test,
   moduleFor
 } from 'ember-qunit';
 
-moduleFor('service:clock', 'Unit - Clock');
+moduleFor('service:clock', 'Unit - Clock', {
+  setup: function() {
+    this.container.register('service:clock', Clock);
+  }
+});
 
 test('assert that clock will tick two seconds accurately', function() {
   expect(1);
