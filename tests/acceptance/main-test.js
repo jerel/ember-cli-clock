@@ -1,21 +1,15 @@
 import Ember from 'ember';
-import startApp from '../helpers/start-app';
+import { test } from 'qunit';
+import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
 
-var App;
+moduleForAcceptance('Acceptance | main');
 
-module('Acceptance: Main', {
-  setup: function() {
-    App = startApp();
-  },
-  teardown: function() {
-    Ember.run(App, 'destroy');
-  }
-});
-
-test('testing that the clock service starts', function() {
+test('visiting /', function(assert) {
   visit('/');
 
-  Ember.run.later(function() {
-    equal(find('li:first').text(), '1 seconds', 'Verify that the clock ticks once');
-  }, 1100);
+  andThen(function() {
+    Ember.run.later(function() {
+      assert.equal(find('li:first').text(), '1 seconds', 'Verify that the clock ticks once');
+    }, 1100);
+  });
 });

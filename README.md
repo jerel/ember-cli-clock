@@ -15,23 +15,23 @@ time up-to-date so I generalized the solution to this Ember CLI Add-on.
 
 ## Usage
 
-The `clock` service is injected into all controllers. This means
+Inject the `clock` service: `clock: Ember.inject.service()`. Now
 you can observe changes like so for use with MomentJS:
 
-    App.MessageController = Ember.Controller.extend({
-      posted: function() {
+    App.TweetComponent = Ember.Component.extend({
+      posted: Ember.computed('clock.minute', function() {
         return moment(this.get('timestamp')).fromNow();
-      }.property('clock.minute')
+      })
     });
 
-    {{posted}} outputs "2 minutes ago" and updates
+    {{posted}} outputs "2 minutes ago" and updates every minute
 
 Or a clock that uses the local system time and updates every second.
 
-    App.ApplicationController = Ember.Controller.extend({
-      time: function() {
+    App.ClockComponent = Ember.Component.extend({
+      time: Ember.computed('clock.second', function() {
         return moment().format('h:m:s');
-      }.property('clock.second')
+      })
     });
 
 ## API
