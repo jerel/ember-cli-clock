@@ -10,10 +10,7 @@ export default Ember.Service.extend({
 
   init() {
     this._super(...arguments);
-    var interval = window.setInterval(() => {
-        this.tick.call(this);
-      }, this.get('intervalTime'));
-    this.set('interval', interval);
+    this.set('interval', window.setInterval(() => this.tick(), this.get('intervalTime')));
   },
 
   reset() {
