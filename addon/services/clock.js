@@ -7,25 +7,29 @@ export default Ember.Service.extend({
   five: 0,
   quarter: 0,
   hour: 0,
-  init: function() {
+
+  init() {
     this._super(...arguments);
     var interval = window.setInterval(() => {
         this.tick.call(this);
       }, this.get('intervalTime'));
     this.set('interval', interval);
   },
-  reset: function() {
+
+  reset() {
     this.willDestroy();
     this.init();
     this.setProperties({second: 0, minute: 0, five: 0, quarter: 0, hour: 0});
   },
+
   intervalChange: Ember.observer('intervalTime', function() {
     if (Ember.testing) {
       return this.reset();
     }
     throw Error('The clock interval cannot be changed except during testing');
   }),
-  tick: function() {
+
+  tick() {
     Ember.run(this, function() {
       var second = this.incrementProperty('second');
 
@@ -48,7 +52,8 @@ export default Ember.Service.extend({
       }
     });
   },
-  willDestroy: function() {
+
+  willDestroy() {
     window.clearInterval(this.get('interval'));
   }
 });
