@@ -1,11 +1,8 @@
 import Ember from 'ember';
 
-import {
-  test,
-  moduleFor
-} from 'ember-qunit';
+import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('service:clock', 'Unit - Clock');
+moduleFor('service:clock', 'Unit | Service | clock');
 
 test('assert that clock will tick two seconds accurately', function(assert) {
   assert.expect(1);
