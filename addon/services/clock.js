@@ -10,13 +10,21 @@ export default Ember.Service.extend({
 
   init() {
     this._super(...arguments);
+    this.start();
+  },
+
+  start() {
     this.set('interval', window.setInterval(() => this.tick(), this.get('intervalTime')));
   },
 
+  stop() {
+    window.clearInterval(this.get('interval'));
+  },
+
   reset() {
-    this.willDestroy();
-    this.init();
+    this.stop();
     this.setProperties({second: 0, minute: 0, five: 0, quarter: 0, hour: 0});
+    this.start();
   },
 
   intervalChange: Ember.observer('intervalTime', function() {
@@ -51,6 +59,6 @@ export default Ember.Service.extend({
   },
 
   willDestroy() {
-    window.clearInterval(this.get('interval'));
+    this.stop();
   }
 });
