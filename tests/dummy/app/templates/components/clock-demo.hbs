@@ -6,15 +6,21 @@
   <li>{{clock.hour}} hours</li>
 </ul>
 
-<div class="boxed">
-  <p>
-    Use this clock for updating displayed dates or other background work where
-    you need to observe a "tick" on a second or minute frequency.
-  </p>
+<button {{action 'reset'}}>Reset Clock</button>
 
-  <button {{action 'reset'}}>Reset Clock</button>
+<h3>Alternative</h3>
 
-  <p>
-    <a href="http://github.com/jerel/ember-cli-clock">Download the code</a>
-  </p>
-</div>
+<ul>
+  <li>01 sec update rate: {{clock-1sec.time}} ({{clock-1sec.date}})</li>
+  <li>05 sec update rate: {{clock-5sec.time}} ({{clock-5sec.date}})</li>
+  <li>30 sec update rate: {{clock-30sec.time}} ({{clock-30sec.date}})</li>
+</ul>
+
+<p>
+  Use these clocks for updating displayed dates or other background work where
+  you need to observe a "tick" on a second or minute frequency.
+</p>
+
+<p>
+  <a href="http://github.com/jerel/ember-cli-clock">Download the code</a>
+</p>
