@@ -1,3 +1,3 @@
-import Clock from 'ember-cli-clock/services/clock';
+import Clock from 'ember-cli-clock/services/legacy';
 
 export default Clock;
