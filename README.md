@@ -11,7 +11,7 @@ time up-to-date so I generalized the solution to this Ember CLI Add-on.
 
 ## Installation
 
-`npm install --save-dev ember-cli-clock`
+`ember install ember-cli-clock`
 
 ## Usage
 
