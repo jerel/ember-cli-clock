@@ -6,7 +6,7 @@ export default Clock.extend({
     this._super(...arguments);
     Ember.deprecate(
       'Usage of the `clock` service is deprecated. ' +
-      'Please generate you own clock service with `ember generate clock-service`.',
+      'Please generate your own clock service with `ember generate clock <name>`.',
       false,
       {
         id: 'ember-cli-clock.deprecate-legacy-clock-service',
