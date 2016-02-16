@@ -1,60 +1,87 @@
-# Clock
-
-A very simple observable clock service for EmberJS.
-
-I display time in many of my projects and need to keep the displayed
-time up-to-date so I generalized the solution to this Ember CLI Add-on.
-
-[Live Demo](http://clock.jerel.co/)
+# ember-cli-clock
 
 [![Build Status](https://travis-ci.org/jerel/ember-cli-clock.svg?branch=master)](https://travis-ci.org/jerel/ember-cli-clock)
+
+A simple clock service for Ember.js
+
+
+## Live Demo
+
+View a live demo here: <http://clock.jerel.co/>
+
 
 ## Installation
 
 `ember install ember-cli-clock`
 
+
 ## Usage
 
-Inject the `clock` service: `clock: Ember.inject.service()`. Now
-you can observe changes like so for use with MomentJS:
+1. Generate a clock service
 
-    App.TweetComponent = Ember.Component.extend({
-      posted: Ember.computed('clock.minute', function() {
-        return moment(this.get('timestamp')).fromNow();
-      })
-    });
+   `ember generate clock my-shiny-new-clock`
 
-    {{posted}} outputs "2 minutes ago" and updates every minute
+2. Inject the `my-shiny-new-clock` service into your component, controller,
+   route, ...
 
-Or a clock that uses the local system time and updates every second.
+   `clock: Ember.inject.service('my-shiny-new-clock')`
 
-    App.ClockComponent = Ember.Component.extend({
-      time: Ember.computed('clock.second', function() {
-        return moment().format('h:m:s');
-      })
-    });
+3. Use the `time` (`Date.now()`) and `date` (`Date` instance) properties
+   of the clock service 
+
+
+## Examples
+
+```js
+// app/components/iso-date.js
+
+export default Ember.Component.extend({
+  clock: Ember.inject.service('my-shiny-new-clock'),
+
+  iso: Ember.computed('clock.date', function() {
+    return this.get('clock.date').toISOString();
+  })
+});
+```
+
+Using `{{iso}}` in the template will output something like 
+`2011-10-05T14:48:00.000Z` and update it every second.
+
+
+```js
+// app/components/device-status.js
+
+export default Ember.Component.extend({
+  clock: Ember.inject.service('my-shiny-new-clock'),
+
+  isOnline: Ember.computed('lastContact', 'clock.time', function() {
+    return this.get('clock.time') - this.get('lastContact') < 60 * 1000;
+  })
+});
+```
+
+The `isOnline` property is updated every second and will tell
+if the last contact of the device was less than 60 seconds ago.
+
 
 ## API
 
-You can observe or display the following properties:
+### Properties
 
-* `second`
-* `minute`
-* `five`
-* `quarter`
-* `hour`
+- `interval` (default: 1000ms) - the update interval of `time` and `date`
+- `time` (read-only) - will be set to `Date.now()` every `interval` milliseconds
+- `date` (read-only) - computed property: `new Date(this.get('time'))`
 
-Each one is an incrementing integer.
+### Methods
 
-During testing you may also set a custom interval time to speed up your tests.
-For example use `this.clock.set('intervalTime', 100);` to run the clock 10 times faster.
-
-You may also reset the clock to 0 using `this.clock.reset();`
+- `start()` - starts the clock after it has been stopped
+- `stop()` - stops the clock from updating `time` and `date` until restarted
 
 
 ## Authors
 
 * [Jerel Unruh](http://twitter.com/jerelunruh/)
+* [Tobias Bieniek](https://github.com/Turbo87)
 
 ## Legal
 
