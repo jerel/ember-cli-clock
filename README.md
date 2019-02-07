@@ -24,7 +24,7 @@ View a live demo here: <http://clock.jerel.co/>
 2. Inject the `my-shiny-new-clock` service into your component, controller,
    route, ...
 
-   `clock: Ember.inject.service('my-shiny-new-clock')`
+   `clock: service('my-shiny-new-clock')`
 
 3. Use the `time` (`Date.now()`) and `date` (`Date` instance) properties
    of the clock service 
@@ -34,11 +34,14 @@ View a live demo here: <http://clock.jerel.co/>
 
 ```js
 // app/components/iso-date.js
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
 
-export default Ember.Component.extend({
-  clock: Ember.inject.service('my-shiny-new-clock'),
+export default Component.extend({
+  clock: service('my-shiny-new-clock'),
 
-  iso: Ember.computed('clock.date', function() {
+  iso: computed('clock.date', function() {
     return this.get('clock.date').toISOString();
   })
 });
@@ -50,11 +53,14 @@ Using `{{iso}}` in the template will output something like
 
 ```js
 // app/components/device-status.js
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
 
-export default Ember.Component.extend({
-  clock: Ember.inject.service('my-shiny-new-clock'),
+export default Component.extend({
+  clock: service('my-shiny-new-clock'),
 
-  isOnline: Ember.computed('lastContact', 'clock.time', function() {
+  isOnline: computed('lastContact', 'clock.time', function() {
     return this.get('clock.time') - this.get('lastContact') < 60 * 1000;
   })
 });
@@ -82,6 +88,7 @@ if the last contact of the device was less than 60 seconds ago.
 
 * [Jerel Unruh](http://twitter.com/jerelunruh/)
 * [Tobias Bieniek](https://github.com/Turbo87)
+* [Andy Rohr](https://github.com/arohr)
 
 ## Legal
 
