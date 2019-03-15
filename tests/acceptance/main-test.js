@@ -1,15 +1,16 @@
-import Ember from 'ember';
-import { test } from 'qunit';
-import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
+import { module, test } from 'qunit';
+import { visit } from '@ember/test-helpers';
+import { setupApplicationTest } from 'ember-qunit';
+import { later } from '@ember/runloop'
 
-moduleForAcceptance('Acceptance | main');
+module('Acceptance | main', function(hooks) {
+  setupApplicationTest(hooks);
 
-test('visiting /', function(assert) {
-  visit('/');
+  test('visiting /', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    Ember.run.later(function() {
-      assert.equal(find('li:first').text(), '1 seconds', 'Verify that the clock ticks once');
+    later(() => {
+      assert.equal(this.element.querySelector('ul li').textContent, '1 seconds', 'Verify that the clock ticks once');
     }, 1100);
   });
 });

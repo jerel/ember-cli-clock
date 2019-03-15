@@ -1,10 +1,11 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
-export default Ember.Component.extend({
-  clock: Ember.inject.service(),
-  'clock-1sec': Ember.inject.service(),
-  'clock-5sec': Ember.inject.service(),
-  'clock-30sec': Ember.inject.service(),
+export default Component.extend({
+  clock:         service(),
+  'clock-1sec':  service(),
+  'clock-5sec':  service(),
+  'clock-30sec': service(),
 
   actions: {
     reset() {
